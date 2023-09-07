@@ -1,8 +1,39 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+import FormattedDate from '@/components/FormattedDate.astro'
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+)
 ---
 
-<BaseLayout title="hello">
-  <div>hello</div>
+<BaseLayout title="home">
+  <article class="flex flex-col space-y-6 [&_>_*]:m-0">
+    <header class="flex flex-col space-y-2">
+      <h1 class="font-bold text-3xl">Blog</h1>
+      <p class="text-sm text-neutral-500">{posts.length} posts</p>
+    </header>
+    <section>
+      <ol>
+        {
+          posts.map(post => (
+            <li>
+              <h1 class="font-bold text-xl">
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="inline-flex items-center p-0 appearance-none bg-transparent border-0 decoration-0 underline-offset-2
+                  focus:outline-none underline hover:decoration-dotted"
+                  transition:name={`post-${post.data.title}`}
+                >
+                  {post.data.title}
+                </a>
+              </h1>
+              <FormattedDate className="text-sm" date={post.data.pubDate} />
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </article>
 </BaseLayout>

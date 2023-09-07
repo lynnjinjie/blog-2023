@@ -1,10 +1,23 @@
 ---
-import { SITE_TITLE } from "../consts";
+import { SITE_TITLE } from '../consts'
+import ThemeIcon from './ThemeIcon.astro'
+import ThemeToggle from './ThemeToggleButton'
 ---
 
-<header>
-  <nav>
-    <a href="/">home</a>
-    <a href="/blog/test">blog</a>
-  </nav>
+<header class="sticky top-0 w-full p-2 z-20 backdrop-blur-md border-b">
+  <div class="mx-auto max-w-3xl">
+    <nav class="flex items-center gap-3 text-base">
+      <a href="/">
+        <h2 class="font-semibold tracking-tighter p-2 font-mono text-lg">
+          {SITE_TITLE}
+        </h2>
+      </a>
+      <div class="items-center gap-6 hidden md:flex">
+        <a href="/about">About</a>
+      </div>
+      <div class="flex-1"></div>
+      <!-- <ThemeIcon /> -->
+      <ThemeToggle client:visible />
+    </nav>
+  </div>
 </header>
