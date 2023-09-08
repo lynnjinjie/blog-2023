@@ -28,12 +28,8 @@ export default function ThemeToggle() {
     const root = document.documentElement
     if (theme === 'light') {
       root.classList.remove('dark')
-      // root.setAttribute('data-theme', 'light')
-      // root.style.colorScheme = 'light'
     } else {
       root.classList.add('dark')
-      // root.setAttribute('data-theme', 'dark')
-      // root.style.colorScheme = 'dark'
     }
   }, [theme])
 
