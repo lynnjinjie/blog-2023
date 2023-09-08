@@ -1,6 +1,9 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
   "extends": [
     "plugin:astro/recommended"
   ],
@@ -23,5 +26,6 @@
         // "astro/no-set-html-directive": "error"
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["*.md"]
 }

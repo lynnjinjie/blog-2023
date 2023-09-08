@@ -9,7 +9,7 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <BaseLayout title="home">
-  <article class="flex flex-col space-y-6 [&_>_*]:m-0">
+  <article class="flex flex-col space-y-6 [&_>_*]:m-0 max-w-3xl">
     <header class="flex flex-col space-y-2">
       <h1 class="font-bold text-3xl">Blog</h1>
       <p class="text-sm text-neutral-500">{posts.length} posts</p>
@@ -19,12 +19,14 @@ const posts = (await getCollection('blog')).sort(
         {
           posts.map(post => (
             <li>
-              <h1 class="font-bold text-xl">
+              <h1
+                class="font-bold text-xl"
+                transition:name={`post-${post.data.title}`}
+              >
                 <a
                   href={`/blog/${post.slug}`}
                   class="inline-flex items-center p-0 appearance-none bg-transparent border-0 decoration-0 underline-offset-2
                   focus:outline-none underline hover:decoration-dotted"
-                  transition:name={`post-${post.data.title}`}
                 >
                   {post.data.title}
                 </a>

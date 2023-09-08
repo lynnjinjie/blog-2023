@@ -2,7 +2,6 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css'
-
 interface Props {
   title: string
   description?: string
@@ -48,6 +47,7 @@ const {
 
 <script is:inline>
 const theme = (() => {
+  document.documentElement.classList.add('[&_*]:!transition-none')
   if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
     return localStorage.getItem('theme')
   }
