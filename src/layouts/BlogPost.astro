@@ -1,17 +1,25 @@
 ---
 import type { CollectionEntry } from 'astro:content'
+import { getEntry } from 'astro:content'
 import BaseLayout from './BaseLayout.astro'
 import FormattedDate from '@/components/FormattedDate.astro'
+import Toc from '@/components/Toc.astro'
 
 type Props = CollectionEntry<'blog'>['data']
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props
+const { slug } = Astro.params
+const entry = await getEntry('blog', slug!)
+const { headings } = await entry!.render()
 ---
 
 <BaseLayout title={title} description="hello">
+  <Toc headings={headings} />
   <article class="prose dark:prose-invert mx-auto max-w-full p-1">
     <div class="title">
-      <h1 class="text-3xl my-1" transition:name={`post-${title}`}>{title}</h1>
+      <h1 class="text-3xl my-1" transition:name={`post-${title}`}>
+        {title}
+      </h1>
       <div class="mb-2">
         <FormattedDate date={new Date(pubDate)} />
         {

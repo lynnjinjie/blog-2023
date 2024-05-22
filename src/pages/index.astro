@@ -18,11 +18,10 @@ const posts = (await getCollection('blog')).sort(
       <ol>
         {
           posts.map(post => (
-            <li>
-              <h1
-                class="font-bold text-xl"
-                transition:name={`post-${post.data.title}`}
-              >
+            <li class="flex items-center">
+              <h1 class="text-xl" transition:name={`post-${post.data.title}`}>
+                <FormattedDate className="text-sm" date={post.data.pubDate} />
+                &nbsp;&nbsp;
                 <a
                   href={`/blog/${post.slug}`}
                   class="inline-flex items-center p-0 appearance-none bg-transparent border-0 decoration-0 underline-offset-2
@@ -31,7 +30,6 @@ const posts = (await getCollection('blog')).sort(
                   {post.data.title}
                 </a>
               </h1>
-              <FormattedDate className="text-sm" date={post.data.pubDate} />
             </li>
           ))
         }
